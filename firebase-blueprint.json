@@ -1,0 +1,98 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user profile information and roles.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique identifier for the user." },
+        "displayName": { "type": "string", "description": "User's full name." },
+        "email": { "type": "string", "format": "email", "description": "User's email address." },
+        "photoURL": { "type": "string", "format": "uri", "description": "URL to user's profile picture." },
+        "role": { "type": "string", "enum": ["admin", "client"], "description": "User's role in the system." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the profile was created." }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Meeting": {
+      "title": "Meeting Request",
+      "description": "Stores meeting requests from users to departments.",
+      "type": "object",
+      "properties": {
+        "requesterUid": { "type": "string", "description": "UID of the user requesting the meeting." },
+        "requesterName": { "type": "string", "description": "Name of the requester." },
+        "requesterEmail": { "type": "string", "format": "email", "description": "Email of the requester." },
+        "department": { "type": "string", "description": "Target department for the meeting." },
+        "date": { "type": "string", "format": "date", "description": "Requested date for the meeting." },
+        "time": { "type": "string", "description": "Requested time slot." },
+        "purpose": { "type": "string", "description": "Reason for the meeting." },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"], "description": "Current status of the request." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the request was made." }
+      },
+      "required": ["requesterUid", "department", "date", "time", "status"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "System notifications for users.",
+      "type": "object",
+      "properties": {
+        "recipientUid": { "type": "string", "description": "UID of the user who should receive the notification." },
+        "title": { "type": "string", "description": "Short title of the notification." },
+        "message": { "type": "string", "description": "Detailed message content." },
+        "isRead": { "type": "boolean", "description": "Whether the notification has been read." },
+        "type": { "type": "string", "description": "Category of notification (e.g., meeting_request, system)." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the notification was created." }
+      },
+      "required": ["recipientUid", "title", "message", "isRead"]
+    },
+    "ContactMessage": {
+      "title": "Contact Message",
+      "description": "Messages sent via the contact form.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the person sending the message." },
+        "email": { "type": "string", "format": "email", "description": "Email of the sender." },
+        "subject": { "type": "string", "description": "Subject of the message." },
+        "message": { "type": "string", "description": "The message body." },
+        "uid": { "type": "string", "description": "UID of the user if they were logged in." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the message was sent." }
+      },
+      "required": ["name", "email", "subject", "message"]
+    },
+    "AppConfig": {
+      "title": "App Configuration",
+      "description": "Global application settings and configurations.",
+      "type": "object",
+      "properties": {
+        "availableTimeSlots": { 
+          "type": "array", 
+          "items": { "type": "string" },
+          "description": "List of available time slots for scheduling." 
+        },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "When the config was last updated." }
+      },
+      "required": ["availableTimeSlots"]
+    },
+    "Asset": {
+      "title": "User Asset",
+      "description": "Stores user financial assets for the wealth portfolio.",
+      "type": "object",
+      "properties": {
+        "ownerUid": { "type": "string", "description": "UID of the user who owns the asset." },
+        "name": { "type": "string", "description": "Name of the asset (e.g., Bitcoin, Real Estate)." },
+        "value": { "type": "number", "description": "Current value of the asset." },
+        "category": { "type": "string", "enum": ["Real Estate", "Stocks", "Crypto", "Cash", "Other"], "description": "Category of the asset." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the asset was added." }
+      },
+      "required": ["ownerUid", "name", "value", "category"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "UserProfile", "description": "User profile documents." },
+    "/meetings/{meetingId}": { "schema": "Meeting", "description": "Meeting request documents." },
+    "/notifications/{notificationId}": { "schema": "Notification", "description": "User notification documents." },
+    "/contacts/{contactId}": { "schema": "ContactMessage", "description": "Contact form submissions." },
+    "/config/{configId}": { "schema": "AppConfig", "description": "Global app configuration documents." },
+    "/assets/{assetId}": { "schema": "Asset", "description": "User financial asset documents." }
+  }
+}
