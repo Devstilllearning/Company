@@ -1,20 +1,47 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Berrionaire: The Future of Strategic Wealth
 
-# Run and deploy your AI Studio app
+Berrionaire is a premium, high-performance wealth management and strategic intelligence platform. Designed for the elite, it combines sophisticated data visualization, AI-driven intelligence, and secure collaborative tools to provide a comprehensive view of your strategic landscape.
 
-This contains everything you need to run your app locally.
+## Features
 
-View your app in AI Studio: https://ai.studio/apps/3e79d5ad-5d18-49b8-83d1-3b27708d1f51
+- **Strategic Dashboard:** A bento-grid layout providing a high-level overview of pending requests, user activity, and key metrics.
+- **AI Intelligence:** Advanced analytical tools powered by Gemini for strategic foresight and secure analysis.
+- **Portfolio Management:** Detailed asset tracking and 7-year wealth projections with interactive charts.
+- **Secure Synergy:** Collaborative tools for strategic meetings and real-time coordination.
+- **Premium UI:** A glassmorphic, dark-themed interface built with Tailwind CSS and Framer Motion.
 
-## Run Locally
+## Deployment
 
-**Prerequisites:**  Node.js
+### GitHub Pages
+This project is configured for automated deployment to GitHub Pages via GitHub Actions.
 
+1.  **Export to GitHub:** Use the "Export to GitHub" feature in AI Studio.
+2.  **Configure Repository:**
+    -   Go to your GitHub repository **Settings > Pages**.
+    -   Under **Build and deployment > Source**, select **GitHub Actions**.
+3.  **Vite Base Path:**
+    -   If your repository is not at a root domain (e.g., `https://<username>.github.io/<repo-name>/`), you must update `vite.config.ts`:
+        ```ts
+        export default defineConfig({
+          base: '/<repo-name>/',
+          // ...
+        });
+        ```
+4.  **Push to main:** The `deploy.yml` workflow will automatically build and deploy your site whenever you push to the `main` branch.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Firebase
+If you have configured Firebase:
+1.  **Deploy Rules:** Use the `deploy_firebase` tool in AI Studio to sync your Security Rules.
+2.  **Hosting:** You can also deploy to Firebase Hosting by running `firebase deploy` from your local environment after exporting.
+
+## Environment Variables
+Ensure you set the following environment variables in your GitHub repository secrets if you plan to use them in your CI/CD pipeline:
+- `GEMINI_API_KEY`: Your Google Gemini API key.
+
+## Tech Stack
+- **Frontend:** React, TypeScript, Vite
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Database/Auth:** Firebase (Firestore & Auth)
+- **Charts:** Recharts
+- **Icons:** Lucide React
