@@ -45,7 +45,7 @@ export default function Register() {
       // 4. Create welcome notification
       await setDoc(doc(db, 'notifications', `${user.uid}_welcome`), {
         recipientUid: user.uid,
-        title: 'Welcome to Berrionaire!',
+        title: 'Welcome to BERRIONARE!',
         message: `Hello ${formData.name}, we're excited to have you on board. Explore your dashboard to get started.`,
         isRead: false,
         type: 'welcome',
@@ -62,32 +62,32 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
-      <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-brand-red/20 rounded-full blur-[100px]" />
-      <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-brand-purple/20 rounded-full blur-[100px]" />
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-brand-soft">
+      <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-brand-strawberry/10 rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-brand-strawberry/10 rounded-full blur-[100px]" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md glass p-10 md:p-12 rounded-[3rem] relative z-10"
+        className="w-full max-w-md bg-white p-10 md:p-12 rounded-[3.5rem] relative z-10 shadow-2xl border border-brand-strawberry/10"
       >
         <div className="text-center mb-10">
-          <div className="w-16 h-16 bg-brand-purple/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <UserPlus className="w-8 h-8 text-brand-gold" />
+          <div className="w-16 h-16 bg-brand-strawberry/10 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-brand-strawberry/5">
+            <UserPlus className="w-8 h-8 text-brand-strawberry" />
           </div>
-          <h1 className="text-3xl font-bold mb-2">Join Berrionaire</h1>
-          <p className="text-white/50">Start your journey with our innovative team</p>
+          <h1 className="text-3xl font-black mb-2 tracking-tight text-brand-deep">Join BERRIONARE</h1>
+          <p className="text-brand-dark/50 font-medium">Start your journey with our innovative team</p>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm font-medium">
+          <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm font-bold">
             {error}
           </div>
         )}
 
         <form onSubmit={handleRegister} className="space-y-6">
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-white/50 flex items-center gap-2">
+            <label className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-strawberry/60 flex items-center gap-2 ml-1">
               <User className="w-3 h-3" /> Full Name
             </label>
             <input
@@ -96,11 +96,11 @@ export default function Register() {
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="John Doe"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-gold transition-colors"
+              className="w-full bg-brand-soft border border-brand-strawberry/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-strawberry focus:bg-white transition-all duration-300 font-medium text-brand-dark shadow-inner text-lg"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-white/50 flex items-center gap-2">
+            <label className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-strawberry/60 flex items-center gap-2 ml-1">
               <Mail className="w-3 h-3" /> Email Address
             </label>
             <input
@@ -109,11 +109,11 @@ export default function Register() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="name@company.com"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-gold transition-colors"
+              className="w-full bg-brand-soft border border-brand-strawberry/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-strawberry focus:bg-white transition-all duration-300 font-medium text-brand-dark shadow-inner text-lg"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-white/50 flex items-center gap-2">
+            <label className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-strawberry/60 flex items-center gap-2 ml-1">
               <Lock className="w-3 h-3" /> Password
             </label>
             <input
@@ -122,14 +122,14 @@ export default function Register() {
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               placeholder="••••••••"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-gold transition-colors"
+              className="w-full bg-brand-soft border border-brand-strawberry/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-strawberry focus:bg-white transition-all duration-300 font-medium text-brand-dark shadow-inner text-lg"
             />
           </div>
 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-4 rounded-xl bg-brand-purple text-white font-bold text-lg hover:bg-brand-purple/80 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-5 rounded-2xl bg-brand-strawberry text-white font-black text-xs uppercase tracking-[0.2em] shadow-lg shadow-brand-strawberry/30 hover:opacity-90 transition-all duration-500 flex items-center justify-center gap-4 disabled:opacity-50"
           >
             {isLoading ? (
               <>
@@ -138,16 +138,16 @@ export default function Register() {
               </>
             ) : (
               <>
-                Create Account <ArrowRight className="w-5 h-5" />
+                Create Account <ArrowRight className="w-6 h-6 translate-x-1" />
               </>
             )}
           </button>
         </form>
 
         <div className="mt-10 text-center">
-          <p className="text-sm text-white/50">
+          <p className="text-sm text-brand-dark/40 font-medium">
             Already have an account?{' '}
-            <Link to="/login" className="text-brand-gold font-bold hover:underline">Sign In</Link>
+            <Link to="/login" className="text-brand-strawberry font-black uppercase text-xs tracking-widest hover:underline ml-1">Sign In</Link>
           </p>
         </div>
       </motion.div>

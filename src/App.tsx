@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -18,23 +18,21 @@ import Portfolio from './pages/Portfolio';
 import Intelligence from './pages/Intelligence';
 import { Toaster } from 'sonner';
 import { FirebaseProvider, useAuth } from './components/FirebaseProvider';
+import { AnimatePresence, motion } from 'motion/react';
 
-function AppContent() {
-  const { loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-brand-black flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-brand-purple border-t-brand-gold rounded-full animate-spin" />
-      </div>
-    );
-  }
-
+function AnimatedRoutes() {
+  const location = useLocation();
+  
   return (
-    <Router>
-      <Toaster position="top-right" expand={false} richColors />
-      <Layout>
-        <Routes>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Routes location={location}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/team" element={<Team />} />
@@ -47,6 +45,27 @@ function AppContent() {
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/intelligence" element={<Intelligence />} />
         </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+function AppContent() {
+  const { loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-brand-soft flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-brand-strawberry/20 border-t-brand-strawberry rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  return (
+    <Router>
+      <Toaster position="top-right" expand={false} richColors />
+      <Layout>
+        <AnimatedRoutes />
       </Layout>
     </Router>
   );
