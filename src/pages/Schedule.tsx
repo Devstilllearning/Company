@@ -4,6 +4,7 @@ import { Calendar as CalendarIcon, Clock, User, Mail, MessageSquare, CheckCircle
 import { format, addDays, startOfToday } from 'date-fns';
 import { useAuth } from '../components/FirebaseProvider';
 import { collection, addDoc, serverTimestamp, doc, getDoc } from 'firebase/firestore';
+import { toast } from 'sonner';
 import { db, handleFirestoreError, OperationType } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 
@@ -116,8 +117,10 @@ export default function Schedule() {
       });
 
       setIsSubmitted(true);
+      toast.success('Your strategic session request has been transmitted.');
     } catch (err) {
       handleFirestoreError(err, OperationType.CREATE, 'meetings');
+      toast.error('Strategic transmission failed. Please verify credentials.');
     } finally {
       setIsSubmitting(false);
     }

@@ -122,10 +122,11 @@ service cloud.firestore {
     }
 
     function isValidMeeting(data) {
-      return hasRequiredFields(['requesterUid', 'department', 'date', 'time', 'purpose', 'status', 'createdAt']) &&
-             hasOnlyAllowedFields(['requesterUid', 'requesterName', 'requesterEmail', 'department', 'date', 'time', 'purpose', 'status', 'createdAt']) &&
+      return hasRequiredFields(['requesterUid', 'department', 'date', 'time', 'purpose', 'status', 'createdAt', 'meetingType']) &&
+             hasOnlyAllowedFields(['requesterUid', 'requesterName', 'requesterEmail', 'department', 'date', 'time', 'purpose', 'status', 'createdAt', 'meetingType', 'location', 'meetLink']) &&
              data.requesterUid == request.auth.uid &&
              data.status in ['pending', 'confirmed', 'cancelled'] &&
+             data.meetingType in ['google-meet', 'whatsapp', 'offline'] &&
              data.purpose.size() < 1000;
     }
 

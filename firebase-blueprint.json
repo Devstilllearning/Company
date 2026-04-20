@@ -31,6 +31,9 @@
         "date": { "type": "string", "format": "date", "description": "Requested date for the meeting." },
         "time": { "type": "string", "description": "Requested time slot." },
         "purpose": { "type": "string", "description": "Reason for the meeting." },
+        "meetingType": { "type": "string", "enum": ["google-meet", "whatsapp", "offline"], "description": "Method of meeting." },
+        "location": { "type": "string", "description": "Meeting location or platform info." },
+        "meetLink": { "type": "string", "format": "uri", "description": "Auto-generated Google Meet link." },
         "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"], "description": "Current status of the request." },
         "createdAt": { "type": "string", "format": "date-time", "description": "When the request was made." }
       },
